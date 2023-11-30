@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel = 'stylesheet' href = '/style.css'>
+ 
+</head>
+
+
+    
+<body>
+
+    <h2>箱根駅伝2024 戦力分析</h2>
+
+<img class = img1 src="/img/20230103-HBS1I00002-L.jpg" alt="" width="500" height="300">
+
+<br>
+<br>
+
+    <select name="university" id="universitySelect" onchange="toggleButton()">
+      <option value=""></option>
+      <option value="駒澤大学">駒澤大学</option>
+      <option value="青山学院大学">青山学院大学</option>
+      <option value="國學院大学">國學院大学</option>
+      <option value="中央大学">中央大学</option>
+      <option value="早稲田大学">早稲田大学</option>
+    </select>
+    
+<br>
+<br>
+
+<div class = buttonAll>
+    <div id="buttonBox" style="display: none;">
+      <button onclick="getSheetValues('佐藤圭汰')">佐藤圭汰</button>
+    </div>
+    
+    <div id="buttonBox2" style="display: none;">
+      <button onclick="getSheetValuesB('鈴木芽吹')">鈴木芽吹</button>
+    </div>
+    
+
+    <div id="buttonBox3" style="display: none;">
+      <button onclick="getSheetValuesC('篠原倖太朗')">篠原倖太朗</button>
+    </div>
+    
+    <div id="buttonBox4" style="display: none;">
+      <button onclick="getSheetValuesD('佐藤一世')">佐藤一世</button>
+    </div>
+
+    
+    <div id="buttonBox5" style="display: none;">
+      <button onclick="getSheetValuesE('黒田朝日')">黒田朝日</button>
+    </div>
+</div>
+    
+    <!-- 結果を表示するための要素 -->
+
+
+    <br>
+    <div id = "resultbox" >
+      <div id="result"></div>
+      <div id="result2"></div>
+      <div id="result3"></div>
+    </div>
+    
+    <script>
+    const apiKey = '';
+    const spreadsheetKey = '1sh9BH_uBciXede4zlzoMmeufiMyUMs-xH10z6E2g7mw';
+    const sheetName = 'シート2';
+    
+    function toggleButton() {
+      const universitySelect = document.getElementById('universitySelect');
+      const buttonBox = document.getElementById('buttonBox');
+      const buttonBox2 = document.getElementById('buttonBox2');
+      const buttonBox3 = document.getElementById('buttonBox3');
+      const buttonBox4 = document.getElementById('buttonBox4');
+      const buttonBox5 = document.getElementById('buttonBox5');
+    
+      if (universitySelect.value === '駒澤大学') {
+        buttonBox.style.display = 'block';
+        buttonBox2.style.display = 'block';
+        buttonBox3.style.display = 'block';
+        buttonBox4.style.display = 'none';
+        buttonBox5.style.display = 'none';
+      } else if (universitySelect.value === '青山学院大学') {
+        buttonBox.style.display = 'none';
+        buttonBox2.style.display = 'none';
+        buttonBox3.style.display = 'none';
+        buttonBox4.style.display = 'block';
+        buttonBox5.style.display = 'block';
+      } else if (universitySelect.value === '國學院大学') {
+        buttonBox.style.display = 'none';
+        buttonBox2.style.display = 'none';
+        buttonBox3.style.display = 'block';
+        buttonBox4.style.display = 'none';
+        buttonBox5.style.display = 'none';
+      } else if (universitySelect.value === '中央大学') {
+        buttonBox.style.display = 'none';
+        buttonBox2.style.display = 'none';
+        buttonBox3.style.display = 'none';
+        buttonBox4.style.display = 'block';
+        buttonBox5.style.display = 'none';
+      } else if (universitySelect.value === '早稲田大学') {
+        buttonBox.style.display = 'none';
+        buttonBox2.style.display = 'none';
+        buttonBox3.style.display = 'none';
+        buttonBox4.style.display = 'none';
+        buttonBox5.style.display = 'block';
+      } else {
+        // 何も選択されていない場合
+        buttonBox.style.display = 'none';
+        buttonBox2.style.display = 'none';
+        buttonBox3.style.display = 'none';
+        buttonBox4.style.display = 'none';
+        buttonBox5.style.display = 'none';
+      }
+    }
+    
+    function getSheetValues(university) {
+      const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetKey}/values/${sheetName}!A:A?key=${apiKey}`;
+    
+      fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+          const values = data.values.flat();
+          const resultElement = document.getElementById('result');
+          resultElement.innerHTML = `${values.join('<br>')}`;
+        })
+        .catch(error => console.error(`${university}のA列のデータを取得できませんでした:`, error));
+    }
+    
+    
+    function getSheetValuesB(university) {
+      const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetKey}/values/${sheetName}!B:B?key=${apiKey}`;
+    
+      fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+          const valuesB = data.values.flat();
+          const resultElementB = document.getElementById('result2');
+          resultElementB.innerHTML = `${valuesB.join('<br>')}`;
+        })
+        .catch(error => console.error(`${university}のB列のデータを取得できませんでした:`, error));
+    }
+
+
+    function getSheetValuesC(university) {
+      const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetKey}/values/${sheetName}!C:C?key=${apiKey}`;
+    
+      fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+          const valuesC = data.values.flat();
+          const resultElementC = document.getElementById('result3');
+          resultElementC.innerHTML = `${valuesC.join('<br>')}`;
+        })
+        .catch(error => console.error(`${university}のC列のデータを取得できませんでした:`, error));
+    }
+
+
+    function getSheetValuesD(university) {
+      const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetKey}/values/${sheetName}!D:D?key=${apiKey}`;
+    
+      fetch(endpoint)
+        .then(response => response.json())
+        .then(data => {
+          const valuesD = data.values.flat();
+          const resultElementD = document.getElementById('result');
+          resultElementD.innerHTML = `${valuesD.join('<br>')}`;
+        })
+        .catch(error => console.error(`${university}のD列のデータを取得できませんでした:`, error));
+    }
+
+    
+    </script>
+
+
+    <!-- <script src = '/index.js'></script> -->
+</body>
+</html>

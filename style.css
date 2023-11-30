@@ -1,0 +1,26 @@
+
+
+
+
+
+.buttonAll{
+display: flex;
+}
+
+button{
+margin-right: 120px;
+    }
+ 
+
+#resultbox{
+    display: flex; 
+       }  
+
+#result{
+    margin-right: 80px;   
+}
+
+#result2{
+    margin-right: 80px;   
+}
+
